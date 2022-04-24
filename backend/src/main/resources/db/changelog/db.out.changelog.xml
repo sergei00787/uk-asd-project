@@ -1,0 +1,86 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="sergey (generated)" id="1650816860630-1">
+        <createTable tableName="groups">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="groups_pk"/>
+            </column>
+            <column name="parent_id" type="UUID"/>
+            <column name="group_name" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-2">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="src/main/resources/db/data/groups.csv" quotchar="&quot;" separator="," tableName="groups">
+            <column header="id" name="id" type="STRING"/>
+            <column header="parent_id" name="parent_id" type="STRING"/>
+            <column header="group_name" name="group_name" type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-3">
+        <createTable tableName="devices">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serial" type="INTEGER"/>
+            <column name="name" type="VARCHAR"/>
+            <column name="allowed" type="BOOLEAN"/>
+            <column name="image" type="VARCHAR"/>
+            <column name="image_colored" type="VARCHAR"/>
+            <column name="group_id" type="UUID"/>
+            <column name="is_area_enabled" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-4">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="src/main/resources/db/data/devices.csv" quotchar="&quot;" separator="," tableName="devices">
+            <column header="id" name="id" type="STRING"/>
+            <column header="serial" name="serial" type="NUMERIC"/>
+            <column header="name" name="name" type="STRING"/>
+            <column header="allowed" name="allowed" type="BOOLEAN"/>
+            <column header="image" name="image" type="STRING"/>
+            <column header="image_colored" name="image_colored" type="STRING"/>
+            <column header="group_id" name="group_id" type="STRING"/>
+            <column header="is_area_enabled" name="is_area_enabled" type="BOOLEAN"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-5">
+        <createTable tableName="properties">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_id" type="UUID"/>
+            <column name="inherited" type="BOOLEAN"/>
+            <column name="prop_type" type="INTEGER"/>
+            <column name="name" type="VARCHAR"/>
+            <column name="value" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-6">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="src/main/resources/db/data/properties.csv" quotchar="&quot;" separator="," tableName="properties">
+            <column header="id" name="id" type="STRING"/>
+            <column header="device_id" name="device_id" type="STRING"/>
+            <column header="inherited" name="inherited" type="BOOLEAN"/>
+            <column header="prop_type" name="prop_type" type="NUMERIC"/>
+            <column header="name" name="name" type="STRING"/>
+            <column header="value" name="value" type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-7">
+        <createIndex indexName="devices_id_uindex" tableName="devices" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-8">
+        <createIndex indexName="properties_id_uindex" tableName="properties" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="sergey (generated)" id="1650816860630-9">
+        <createTable tableName="test">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="preferences" type="TEXT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
